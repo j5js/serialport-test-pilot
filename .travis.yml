@@ -1,0 +1,50 @@
+---
+sudo: false
+language: js
+
+# Build matrix
+os:
+- linux
+- osx
+env:
+  matrix:
+  - TRAVIS_NODE_VERSION="0.10"
+  - TRAVIS_NODE_VERSION="0.10" ARCH="x86"
+  - TRAVIS_NODE_VERSION="0.12"
+  - TRAVIS_NODE_VERSION="0.12" ARCH="x86"
+  - TRAVIS_NODE_VERSION="4"
+  - TRAVIS_NODE_VERSION="4" ARCH="x86"
+  - TRAVIS_NODE_VERSION="5"
+  - TRAVIS_NODE_VERSION="5" ARCH="x86"
+  - TRAVIS_NODE_VERSION="6"
+  - TRAVIS_NODE_VERSION="6" ARCH="x86"
+matrix:
+  exclude:
+  - os: osx
+    env: TRAVIS_NODE_VERSION="0.10" ARCH="x86"
+  - os: osx
+    env: TRAVIS_NODE_VERSION="0.12" ARCH="x86"
+  - os: osx
+    env: TRAVIS_NODE_VERSION="4" ARCH="x86"
+  - os: osx
+    env: TRAVIS_NODE_VERSION="5" ARCH="x86"
+  - os: osx
+    env: TRAVIS_NODE_VERSION="6" ARCH="x86"
+
+before_install:
+# reinstall latest nvm
+- rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh
+- nvm install $TRAVIS_NODE_VERSION
+- PATH=$PATH:`pwd`/node_modules/.bin
+
+# print versions
+- node --version
+- npm --version
+
+# use g++-4.8 on Linux
+- if [[ $TRAVIS_OS_NAME == "linux" ]]; then export CXX=g++-4.8; fi
+- $CXX --version
+
+
+script:
+- npm install serialport
