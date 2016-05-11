@@ -41,10 +41,5 @@ before_install:
 - node --version
 - npm --version
 
-# use g++-4.8 on Linux
-- if [[ $TRAVIS_OS_NAME == "linux" ]]; then export CXX=g++-4.8; fi
-- $CXX --version
-
-
 script:
 - npm install serialport
