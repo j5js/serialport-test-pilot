@@ -33,6 +33,7 @@ install:
   - ps: npm config set -g strict-ssl=false | Write-Host;
 
 test_script:
-  - ps: npm install serialport
+  - npm install serialport
 
-deploy: OFF
+build: off
+deploy: off
