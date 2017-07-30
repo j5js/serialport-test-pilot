@@ -9,6 +9,12 @@ platform:
 - x86
 - x64
 
+# Dropping support for node 4 on 32 windows because it has isuses with ssl certs and npm
+matrix:
+  exclude:
+    - platform: x86
+      nodejs_version: "4"
+
 install:
 - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version) $env:platform;
 - ps: $env:Path += ";$(pwd)\node_modules\.bin";
@@ -20,12 +26,6 @@ install:
       "npm version" = $(npm -v)
       "APPVEYOR_REPO_COMMIT_MESSAGE" = $env:APPVEYOR_REPO_COMMIT_MESSAGE
     } | Out-String | Write-Host;
-
-# # work around an issue with node-gyp v3.3.1 and node 4x
-# # package.json has no certificates in it so we're cool
-# # https://github.com/nodejs/node-gyp/issues/921
-# - ps: npm config set -g cafile=package.json | Write-Host;
-# - ps: npm config set -g strict-ssl=false | Write-Host;
 
 test_script:
 - npm install serialport
