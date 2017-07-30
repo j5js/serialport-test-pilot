@@ -28,9 +28,9 @@ install:
     } | Out-String | Write-Host;
 
 test_script:
-- npm install serialport
+- npm install serialport --fallback-to-build=false
 - rd /s /q node_modules
-- npm install serialport@beta
+- npm install serialport@beta --fallback-to-build=false
 
 build: off
 deploy: off

@@ -24,9 +24,6 @@ matrix:
     env: TRAVIS_NODE_VERSION="8" ARCH="x86"
 
 before_install:
-# reinstall latest nvm
-# - rm -rf ~/.nvm
-# - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 - nvm install $TRAVIS_NODE_VERSION
 
 # print versions
@@ -34,6 +31,6 @@ before_install:
 - npm --version
 
 script:
-- npm install serialport
+- npm install serialport --fallback-to-build=false
 - rm -rf node_modules
-- npm install serialport@beta
+- npm install serialport@beta --fallback-to-build=false
