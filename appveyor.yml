@@ -1,11 +1,9 @@
 os: unstable
 environment:
   matrix:
-  - nodejs_version: "0.10"
-  - nodejs_version: "0.12"
   - nodejs_version: "4"
   - nodejs_version: "6"
-  - nodejs_version: "7"
+  - nodejs_version: "8"
 
 platform:
 - x86
@@ -23,11 +21,11 @@ install:
       "APPVEYOR_REPO_COMMIT_MESSAGE" = $env:APPVEYOR_REPO_COMMIT_MESSAGE
     } | Out-String | Write-Host;
 
-# work around an issue with node-gyp v3.3.1 and node 4x
-# package.json has no certificates in it so we're cool
-# https://github.com/nodejs/node-gyp/issues/921
-- ps: npm config set -g cafile=package.json | Write-Host;
-- ps: npm config set -g strict-ssl=false | Write-Host;
+# # work around an issue with node-gyp v3.3.1 and node 4x
+# # package.json has no certificates in it so we're cool
+# # https://github.com/nodejs/node-gyp/issues/921
+# - ps: npm config set -g cafile=package.json | Write-Host;
+# - ps: npm config set -g strict-ssl=false | Write-Host;
 
 test_script:
 - npm install serialport

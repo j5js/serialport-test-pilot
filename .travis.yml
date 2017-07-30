@@ -8,33 +8,25 @@ os:
 - osx
 env:
   matrix:
-  - TRAVIS_NODE_VERSION="0.10"
-  - TRAVIS_NODE_VERSION="0.10" ARCH="x86"
-  - TRAVIS_NODE_VERSION="0.12"
-  - TRAVIS_NODE_VERSION="0.12" ARCH="x86"
   - TRAVIS_NODE_VERSION="4"
   - TRAVIS_NODE_VERSION="4" ARCH="x86"
   - TRAVIS_NODE_VERSION="6"
   - TRAVIS_NODE_VERSION="6" ARCH="x86"
-  - TRAVIS_NODE_VERSION="7"
-  - TRAVIS_NODE_VERSION="7" ARCH="x86"
+  - TRAVIS_NODE_VERSION="8"
+  - TRAVIS_NODE_VERSION="8" ARCH="x86"
 matrix:
   exclude:
-  - os: osx
-    env: TRAVIS_NODE_VERSION="0.10" ARCH="x86"
-  - os: osx
-    env: TRAVIS_NODE_VERSION="0.12" ARCH="x86"
   - os: osx
     env: TRAVIS_NODE_VERSION="4" ARCH="x86"
   - os: osx
     env: TRAVIS_NODE_VERSION="6" ARCH="x86"
   - os: osx
-    env: TRAVIS_NODE_VERSION="7" ARCH="x86"
+    env: TRAVIS_NODE_VERSION="8" ARCH="x86"
 
 before_install:
 # reinstall latest nvm
-- rm -rf ~/.nvm
-- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+# - rm -rf ~/.nvm
+# - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 - nvm install $TRAVIS_NODE_VERSION
 
 # print versions
