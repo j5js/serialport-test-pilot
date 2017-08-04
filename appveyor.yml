@@ -29,8 +29,10 @@ install:
 
 test_script:
 - npm install serialport --fallback-to-build=false
+- npm run test
 - rd /s /q node_modules
 - npm install serialport@beta --fallback-to-build=false
+- npm run test
 
 build: off
 deploy: off

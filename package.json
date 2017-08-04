@@ -1,3 +1,6 @@
 {
-  "name": "serialport-test-pilot"
+  "name": "serialport-test-pilot",
+  "scripts": {
+    "test": "serialport-list -f jsonline"
+  }
 }
